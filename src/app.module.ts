@@ -15,6 +15,7 @@ import { PaymentMethodModule } from './modules/payment-method/payment-method.mod
 import { OrderModule } from './modules/order/order.module';
 import { OrderFoodModule } from './modules/order-food/order-food.module';
 import { RestaurantInformationModule } from './modules/restaurant-information/restaurant-information.module';
+import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { RestaurantInformationModule } from './modules/restaurant-information/re
     OrderModule,
     OrderFoodModule,
     RestaurantInformationModule,
+    CloudinaryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
