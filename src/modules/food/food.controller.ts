@@ -19,7 +19,7 @@ import { FoodService } from './food.service';
     join: {},
   },
 })
-@Controller('food')
+@Controller('foods')
 export class FoodController implements CrudController<Food> {
   constructor(public service: FoodService) {}
 }

@@ -23,6 +23,9 @@ export class Customer extends BaseEntity {
   avatar: string;
 
   @Column()
+  avatar_public_id: string;
+
+  @Column()
   date_of_birth: string;
 
   @Column()

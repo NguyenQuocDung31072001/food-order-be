@@ -7,6 +7,9 @@ export class ImageFood extends BaseEntity {
   @Column()
   image: string;
 
+  @Column()
+  image_public_id: string;
+
   @ManyToOne(() => Food, (food) => food.imageFoods)
   food: Food;
   @Column({ nullable: true })

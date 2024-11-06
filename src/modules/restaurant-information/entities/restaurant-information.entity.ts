@@ -7,6 +7,9 @@ export class RestaurantInformation extends BaseEntity {
   image: string;
 
   @Column()
+  image_public_id: string;
+
+  @Column()
   site_name: string;
 
   @Column()

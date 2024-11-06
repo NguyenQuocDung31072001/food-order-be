@@ -8,6 +8,9 @@ export class Categories extends BaseEntity {
   image: string;
 
   @Column()
+  image_public_id: string;
+
+  @Column()
   name: string;
 
   @OneToMany(() => Food, (food) => food.categories)
