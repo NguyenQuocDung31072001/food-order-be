@@ -16,7 +16,14 @@ import { FoodService } from './food.service';
   },
   query: {
     exclude: ['id'],
-    join: {},
+    join: {
+      imageFoods: {
+        eager: true,
+      },
+      categories: {
+        eager: true,
+      },
+    },
   },
 })
 @Controller('foods')

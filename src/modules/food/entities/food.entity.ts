@@ -21,13 +21,13 @@ export class Food extends BaseEntity {
   @Column()
   amount: number;
 
-  @Column()
+  @Column({ nullable: true, default: 0 })
   number_of_order: number;
 
-  @Column()
+  @Column({ nullable: true, default: 0 })
   number_of_favorite: number;
 
-  @Column()
+  @Column({ nullable: true, default: false })
   disabled: boolean;
 
   @ManyToOne(() => Categories, (categories) => categories.foods)
