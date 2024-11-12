@@ -5,7 +5,7 @@ import { ImageFood } from 'src/modules/image-food/entities/image-food.entity';
 import { OrderFood } from 'src/modules/order-food/entities/order-food.entity';
 import { RatingFood } from 'src/modules/rating-food/entities/rating-food.entity';
 import { BaseEntity } from 'src/shared/entities';
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class Food extends BaseEntity {
@@ -35,21 +35,24 @@ export class Food extends BaseEntity {
   @Column({ nullable: true })
   categories_id: string;
 
-  @OneToMany(() => ImageFood, (imageFood) => imageFood.food)
+  @OneToMany(() => ImageFood, (imageFood) => imageFood.food, { cascade: true })
   imageFoods: ImageFood[];
 
-  @OneToMany(() => RatingFood, (ratingFood) => ratingFood.food)
+  @OneToMany(() => RatingFood, (ratingFood) => ratingFood.food, {
+    cascade: true,
+  })
   ratingFoods: RatingFood[];
 
   @OneToMany(
     () => CustomerFavoriteFood,
     (customerFavoriteFood) => customerFavoriteFood.food,
+    { cascade: true },
   )
   favoriteFoods: CustomerFavoriteFood[];
 
-  @OneToMany(() => CartFood, (cartFood) => cartFood.food)
+  @OneToMany(() => CartFood, (cartFood) => cartFood.food, { cascade: true })
   cartFoods: CartFood[];
 
-  @OneToMany(() => OrderFood, (orderFood) => orderFood.food)
+  @OneToMany(() => OrderFood, (orderFood) => orderFood.food, { cascade: true })
   orderFoods: OrderFood[];
 }

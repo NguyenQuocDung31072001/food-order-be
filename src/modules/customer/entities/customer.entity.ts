@@ -7,7 +7,10 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity()
 export class Customer extends BaseEntity {
-  @Column()
+  @Column({ default: 'customer' })
+  role: 'admin' | 'customer';
+
+  @Column({ nullable: true })
   fullname: string;
 
   @Column()
@@ -19,28 +22,28 @@ export class Customer extends BaseEntity {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   avatar: string;
 
-  @Column()
+  @Column({ nullable: true })
   avatar_public_id: string;
 
-  @Column()
+  @Column({ nullable: true })
   date_of_birth: string;
 
-  @Column()
+  @Column({ nullable: true })
   recent_address: string;
 
-  @Column()
+  @Column({ nullable: true })
   permanent_address: string;
 
-  @Column()
+  @Column({ nullable: true })
   city: string;
 
-  @Column()
+  @Column({ nullable: true })
   postal_code: string;
 
-  @Column()
+  @Column({ nullable: true })
   country: string;
 
   @OneToMany(() => RatingFood, (ratingFood) => ratingFood.customer)

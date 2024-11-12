@@ -16,6 +16,7 @@ import { OrderModule } from './modules/order/order.module';
 import { OrderFoodModule } from './modules/order-food/order-food.module';
 import { RestaurantInformationModule } from './modules/restaurant-information/restaurant-information.module';
 import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
     OrderFoodModule,
     RestaurantInformationModule,
     CloudinaryModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
