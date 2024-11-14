@@ -12,4 +12,44 @@ export class CartFoodService extends TypeOrmCrudService<CartFood> {
   ) {
     super(repo);
   }
+
+  async addCartFood(body: any) {
+    const { food_id, customer_id, quantity } = body ?? {};
+    const existItem = await this.repo.findOne({
+      where: {
+        food_id,
+        customer_id,
+      },
+    });
+    if (!existItem) {
+      return this.repo.save({
+        food_id,
+        customer_id,
+        quantity,
+      });
+    }
+    existItem.quantity += quantity;
+    return this.repo.save(existItem);
+  }
+
+  async decreaseCartFood(body: any) {
+    const { food_id, customer_id, quantity } = body ?? {};
+    const existItem = await this.repo.findOne({
+      where: {
+        food_id,
+        customer_id,
+      },
+    });
+    if (!existItem) {
+      return {
+        statusCode: 404,
+        message: 'Not found',
+      };
+    }
+    if (existItem.quantity - quantity <= 0) {
+      return this.repo.delete(existItem.id);
+    }
+    existItem.quantity -= quantity;
+    return this.repo.save(existItem);
+  }
 }

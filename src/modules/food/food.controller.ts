@@ -24,6 +24,12 @@ import { CloudinaryService } from '../cloudinary/cloudinary.services';
       categories: {
         eager: true,
       },
+      favoriteFoods: {
+        eager: true,
+      },
+      ratingFoods: {
+        eager: true,
+      },
     },
   },
 })

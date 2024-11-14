@@ -1,5 +1,5 @@
 import { Crud, CrudController } from '@dataui/crud';
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { CartFood } from './entities/cart-food.entity';
 import { CartFoodService } from './cart-food.service';
 
@@ -16,10 +16,44 @@ import { CartFoodService } from './cart-food.service';
   },
   query: {
     exclude: ['id'],
-    join: {},
+    join: {
+      food: {
+        eager: true,
+      },
+      'food.imageFoods': {
+        eager: true,
+      },
+      customer: {
+        eager: false,
+      },
+    },
   },
 })
-@Controller('cart-food')
+@Controller('cart-foods')
 export class CartFoodController implements CrudController<CartFood> {
   constructor(public service: CartFoodService) {}
+
+  @Post('add')
+  async addCartFood(@Body() body: any) {
+    try {
+      return await this.service.addCartFood(body);
+    } catch (error) {
+      return {
+        statusCode: 500,
+        message: error.message,
+      };
+    }
+  }
+
+  @Post('decrease')
+  async decreaseCartFood(@Body() body: any) {
+    try {
+      return await this.service.decreaseCartFood(body);
+    } catch (error) {
+      return {
+        statusCode: 500,
+        message: error.message,
+      };
+    }
+  }
 }
