@@ -22,10 +22,23 @@ import { FoodService } from '../food/food.service';
   },
   query: {
     exclude: ['id'],
-    join: {},
+    join: {
+      paymentMethod: {
+        eager: true,
+      },
+      voucher: {
+        eager: true,
+      },
+      billingInformation: {
+        eager: true,
+      },
+      orderFoods: {
+        eager: false,
+      },
+    },
   },
 })
-@Controller('order')
+@Controller('orders')
 export class OrderController implements CrudController<Order> {
   constructor(
     public service: OrderService,
@@ -50,12 +63,9 @@ export class OrderController implements CrudController<Order> {
         billingInformation,
       );
       const cartFoods = await this.cartFoodService.customGetManyByIds(carts);
-      console.log('cartFoods ', cartFoods);
-
       const total_charge = cartFoods.reduce((acc, cartFood) => {
         return acc + cartFood.quantity * cartFood.food.price;
       }, 0);
-      console.log('total_charge ', total_charge);
 
       const newOrder = await this.service.createOrder({
         customer_id,
@@ -64,7 +74,6 @@ export class OrderController implements CrudController<Order> {
         status: OrderStatus.ON_HOLD,
         total_charge: total_charge,
       });
-      console.log('newOrder ', newOrder);
 
       for (const cartFood of cartFoods) {
         await this.foodService.reduceQuantity(

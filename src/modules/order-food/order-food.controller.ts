@@ -16,10 +16,17 @@ import { OrderFoodService } from './order-food.service';
   },
   query: {
     exclude: ['id'],
-    join: {},
+    join: {
+      food: {
+        eager: true,
+      },
+      'food.imageFoods': {
+        eager: true,
+      },
+    },
   },
 })
-@Controller('order-food')
+@Controller('order-foods')
 export class OrderFoodController implements CrudController<OrderFood> {
   constructor(public service: OrderFoodService) {}
 }

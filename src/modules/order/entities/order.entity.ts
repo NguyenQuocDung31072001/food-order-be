@@ -48,6 +48,7 @@ export class Order extends BaseEntity {
     () => BillingInformation,
     (billingInformation) => billingInformation.order,
   )
+  @JoinColumn({ name: 'billing_information_id' })
   billingInformation: BillingInformation;
   @Column({ nullable: true })
   billing_information_id: string;
