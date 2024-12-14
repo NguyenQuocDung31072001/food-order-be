@@ -7,6 +7,6 @@ export class PaymentMethod extends BaseEntity {
   @Column()
   name: string;
 
-  @OneToMany(() => Order, (order) => order.paymentMethod)
+  @OneToMany(() => Order, (order) => order.paymentMethod, { cascade: true })
   orders: Order[];
 }

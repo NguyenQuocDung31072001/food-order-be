@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@dataui/crud-typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { CartFood } from './entities/cart-food.entity';
 
 @Injectable()
@@ -51,5 +51,38 @@ export class CartFoodService extends TypeOrmCrudService<CartFood> {
     }
     existItem.quantity -= quantity;
     return this.repo.save(existItem);
+  }
+
+  async customGetManyByIds(ids: string[]) {
+    const result: any[] = await this.repo.find({
+      where: {
+        id: In(ids),
+      },
+      relations: ['food'],
+      select: {
+        customer_id: true,
+        food_id: true,
+        quantity: true,
+        food: {
+          amount: true,
+          id: true,
+          price: true,
+        },
+      },
+    });
+    return result as {
+      customer_id: string;
+      food_id: string;
+      quantity: number;
+      food: {
+        amount: number;
+        id: string;
+        price: number;
+      };
+    }[];
+  }
+
+  async deleteRecordByIds(ids: string[]) {
+    return this.repo.delete(ids);
   }
 }

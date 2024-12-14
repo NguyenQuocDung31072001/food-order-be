@@ -5,12 +5,12 @@ import { Order } from './order.entity';
 @Entity()
 export class BillingInformation extends BaseEntity {
   @Column()
-  first_name: string;
+  fullname: string;
 
   @Column()
-  last_name: string;
+  username: string;
 
-  @Column()
+  @Column({ nullable: true })
   company_name: string;
 
   @Column()
@@ -28,7 +28,7 @@ export class BillingInformation extends BaseEntity {
   @Column()
   phone_number: string;
 
-  @Column()
+  @Column({ nullable: true })
   order_notes: string;
 
   @OneToOne(() => Order, (order) => order.billingInformation)

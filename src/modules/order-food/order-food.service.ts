@@ -12,4 +12,8 @@ export class OrderFoodService extends TypeOrmCrudService<OrderFood> {
   ) {
     super(repo);
   }
+
+  async createMultipleRecord(values: any) {
+    return this.repo.save(values);
+  }
 }

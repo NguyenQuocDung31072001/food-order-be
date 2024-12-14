@@ -24,4 +24,18 @@ export class FoodService extends TypeOrmCrudService<Food> {
     }
     throw new Error('Image not found');
   }
+
+  async reduceQuantity(food_id: string, quantity: number) {
+    const food = await this.repo.findOne({
+      where: { id: food_id },
+    });
+    if (!food) {
+      throw new Error('Food not found');
+    }
+    if (food.amount - quantity < 0) {
+      throw new Error('Not enough quantity');
+    }
+    food.amount -= quantity;
+    return await this.repo.save(food);
+  }
 }

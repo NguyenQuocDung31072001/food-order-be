@@ -19,7 +19,7 @@ import { PaymentMethodService } from './payment-method.service';
     join: {},
   },
 })
-@Controller('payment-method')
+@Controller('payment-methods')
 export class PaymentMethodController implements CrudController<PaymentMethod> {
   constructor(public service: PaymentMethodService) {}
 }

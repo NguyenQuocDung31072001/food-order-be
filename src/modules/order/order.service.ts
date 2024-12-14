@@ -12,4 +12,8 @@ export class OrderService extends TypeOrmCrudService<Order> {
   ) {
     super(repo);
   }
+
+  async createOrder(order: any) {
+    return await this.repo.save(order);
+  }
 }

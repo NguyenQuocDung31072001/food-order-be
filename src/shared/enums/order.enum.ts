@@ -1,0 +1,7 @@
+export enum OrderStatus {
+  COMPLETED = 'COMPLETED',
+  PROCESSING = 'PROCESSING',
+  REJECTED = 'REJECTED',
+  ON_HOLD = 'ON_HOLD',
+  IN_TRANSIT = 'IN_TRANSIT',
+}

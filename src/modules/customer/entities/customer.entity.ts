@@ -46,18 +46,27 @@ export class Customer extends BaseEntity {
   @Column({ nullable: true })
   country: string;
 
-  @OneToMany(() => RatingFood, (ratingFood) => ratingFood.customer)
+  @OneToMany(() => RatingFood, (ratingFood) => ratingFood.customer, {
+    cascade: true,
+  })
   ratingFoods: RatingFood[];
 
   @OneToMany(
     () => CustomerFavoriteFood,
     (customerFavoriteFood) => customerFavoriteFood.customer,
+    {
+      cascade: true,
+    },
   )
   favoriteFoods: CustomerFavoriteFood[];
 
-  @OneToMany(() => CartFood, (cartFood) => cartFood.customer)
+  @OneToMany(() => CartFood, (cartFood) => cartFood.customer, {
+    cascade: true,
+  })
   cartFoods: CartFood[];
 
-  @OneToMany(() => Order, (order) => order.customer)
+  @OneToMany(() => Order, (order) => order.customer, {
+    cascade: true,
+  })
   orders: Order[];
 }

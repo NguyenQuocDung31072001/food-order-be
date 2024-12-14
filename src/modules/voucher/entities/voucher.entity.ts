@@ -11,6 +11,6 @@ export class Voucher extends BaseEntity {
   @Column()
   exp_date: Date;
 
-  @OneToMany(() => Order, (order) => order.voucher)
+  @OneToMany(() => Order, (order) => order.voucher, { cascade: true })
   orders: Order[];
 }
